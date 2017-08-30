@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Demo</string>
+    <string name="party_shuffle">Party shuffle</string>
+
+
+
+    <string name="nowplaying_title">Now playing</string>
+</resources>
