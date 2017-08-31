@@ -67,7 +67,6 @@ public class MusicService extends Service {
 
         @Override
         public boolean isPlayerMusic() {
-//            initLrc();
             return playerMusic();
         }
 
@@ -101,14 +100,11 @@ public class MusicService extends Service {
             if (--currentPos < 0) {
                 currentPos = 0;
             }
-//            initLrc();
-            initMusic();
             playerMusic();
         }
 
         @Override
         public void shPlayPre() {
-//            initLrc();
             shuffleMusic();
             playerMusic();
         }
@@ -120,14 +116,12 @@ public class MusicService extends Service {
             if (++currentPos > musicPathLists.size() - 1) {
                 currentPos = musicPathLists.size() - 1;
             }
-//            initLrc();
             initMusic();
             playerMusic();
         }
 
         @Override
         public void shPlayNext() {
-//            initLrc();
             shuffleMusic();
             playerMusic();
         }
@@ -152,7 +146,6 @@ public class MusicService extends Service {
                     if (currentPos >= musicPathLists.size()) {
                         currentPos = 0;
                     }
-//                    initLrc();
                     initMusic();
                     playerMusic();
                 }
@@ -161,18 +154,12 @@ public class MusicService extends Service {
         /*随机播放*/
         @Override
         public void toggleShuffle() {
-//            int min=0;
-//            int max=musicPathLists.size();
-//            Random random = new Random();
-//
-//            int s = random.nextInt(max-min+1) + min;
-//            currentPos=s;
+
                     initLrc();
             mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
                 @Override
                 public void onCompletion(MediaPlayer mp) {
-//                    initLrc();
                     shuffleMusic();
                     playerMusic();
                 }
@@ -258,32 +245,8 @@ public class MusicService extends Service {
         super.onCreate();
         mPlayer = new MediaPlayer();
     }
-//    Handler mHandler = new Handler();
-//    Runnable mRunnable = new Runnable() {
-//        @Override
-//        public void run() {
-//            MainActivity.lrcView.setIndex(lrcIndexx());
-//            MainActivity.lrcView.invalidate();
-//            mHandler.postDelayed(mRunnable, 100);
-//        }
-//    };
-    /**
-     * 初始化歌词配置
-     */
-    public void initLrcx(){
-         /*mLrcProcess = new LrcProcess();
-        //读取歌词文件
-        mLrcProcess.readLRC(musicPathLists.get(currentPos).getMusicPath());
-        //传回处理后的歌词文件
-        lrcList = mLrcProcess.getLrcList();
-        MainActivity.lrcView.setmLrcList(lrcList);
-        //切换带动画显示歌词
-        MainActivity.lrcView.setAnimation(AnimationUtils.loadAnimation(MusicService.this,R.anim.alpha_z));
-            MainActivity.lrcView.setIndex(lrcIndexx());
-            MainActivity.lrcView.invalidate();
-//        mHandler.post(mRunnable);*/
 
-    }
+
     /*显示歌词索引值*/
     public int lrcIndexx() {
         if(mPlayer.isPlaying()) {
@@ -323,7 +286,6 @@ public class MusicService extends Service {
         try {
             mPlayer.setDataSource(musicPathLists.get(currentPos).getMusicPath());
             mPlayer.prepare();
-            initLrcx();
             mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
@@ -347,11 +309,9 @@ public class MusicService extends Service {
         mPlayer.reset();
 
         try {
-//            nextPlay=currentPos;
 
             mPlayer.setDataSource(musicPathLists.get(currentPos).getMusicPath());
             mPlayer.prepare();
-            initLrcx();
             mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
@@ -374,7 +334,6 @@ public class MusicService extends Service {
         try {
             mPlayer.setDataSource(musicPathLists.get(currentPos).getMusicPath());
             mPlayer.prepare();
-//            initLrcx();
             mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
@@ -384,6 +343,7 @@ public class MusicService extends Service {
                     }
 
                     initMusic();
+                    myBinder.initLrc();
                     playerMusic();
                 }
             });
@@ -415,14 +375,11 @@ public class MusicService extends Service {
 
         musicPathLists = intent.getParcelableArrayListExtra("MUSIC_LIST");
         currentPos = intent.getIntExtra("CURRENT_POSITION", -1);
-//       initLrcx();
+        //必须在开始时候启动，否则不会执行
         myBinder.initLrc();
 
             initMusic();
             playerMusic();
-//        initMusic();
-//
-//        playerMusic();
 
         return super.onStartCommand(intent, flags, startId);
     }

@@ -148,15 +148,11 @@
         android:textSize="18sp" />
     <tcl.yihongou.demo.LrcView
         android:id="@+id/lrcShowView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="250dp"
+        android:layout_height="230dp"
         android:layout_below="@+id/musicArtist"
-        android:text="1111"
         android:layout_marginTop="40dp"
         android:scaleType="centerInside"
         android:layout_centerHorizontal="true" />
-    <TextView
-        android:id="@+id/testLrc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
 </RelativeLayout>

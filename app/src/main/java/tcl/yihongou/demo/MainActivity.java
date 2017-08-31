@@ -83,8 +83,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.i("MainActivity","post");
             for (int i = 0; i <mLrcList.size() ; i++) {
                 System.out.println(mLrcList.get(i));
+                Log.i("MainActivity","歌词内容："+mLrcList.get(i));
             }
-            Log.i("MainActivity","for");
+
+
         }
     }
     Runnable mRunnable = new Runnable() {
@@ -93,13 +95,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void run() {
 
             lrcView.setIndex(callBack.lrcIndex());
-            Log.i("MainActivity","setIndex");
-//            lrcView.invalidate();
+            lrcView.invalidate();
             int a=callBack.lrcIndex();
-            Log.i("MainActivity","setIndex="+String.valueOf(a));
-            Log.i("MainActivity","invalidate");
             mHandler.postDelayed(mRunnable, 100);
-            Log.i("MainActivity","postDelayed");
         }
     };
 
@@ -126,17 +124,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 String current = activity.format .format(new Date(currentTime));
                 String total = activity.format.format(new Date(totalTime));
-                //TODO 展示歌词
-                Log.i("MainActivity","initLrc");
-                activity.callBack.initLrc();
-//                activity.lrcView.setAnimation(AnimationUtils.loadAnimation(activity,R.anim.alpha_z));
-//                activity.lrcView.setIndex(activity.callBack.lrcIndex());
-//                activity.lrcView.invalidate();
 
                 activity.currentTimeTxt.setText(current);
                 activity.totalTimeTxt.setText(total);
-
-//                activity.testLrc.setText();
 
                 activity.mMusicTitle.setText(activity.callBack.getTitle());
                 activity.mMusicArtist.setText(activity.callBack.getArtist());
@@ -187,7 +177,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMusicTitle= (TextView) findViewById(R.id.musicTitle);
         mMusicArtist= (TextView) findViewById(R.id.musicArtist);
 
-        testLrc= (TextView) findViewById(R.id.testLrc);
 
         currentTimeTxt = (TextView)findViewById(R.id.current_time_txt);
         totalTimeTxt = (TextView)findViewById(R.id.total_time_txt);

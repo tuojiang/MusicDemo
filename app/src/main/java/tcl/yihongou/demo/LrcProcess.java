@@ -52,7 +52,8 @@ public class LrcProcess {
             //创建一个文件输入流对象
             FileInputStream fis = new FileInputStream(f);
 //            InputStreamReader isr = new InputStreamReader(fis, "GB2312");
-            InputStreamReader isr = new InputStreamReader(fis, "utf-8");
+//            InputStreamReader isr = new InputStreamReader(fis, "utf-8");
+            InputStreamReader isr = new InputStreamReader(fis, "gbk");
             BufferedReader br = new BufferedReader(isr);
             String s = "";
             while((s = br.readLine()) != null) {
