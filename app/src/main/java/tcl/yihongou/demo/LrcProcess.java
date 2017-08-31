@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,23 +16,26 @@ import tcl.yihongou.demo.model.LrcContent;
  * Created by yihong.ou on 17-8-28.
  */
 public class LrcProcess {
+
     private List<LrcContent> lrcList;	//List集合存放歌词内容对象
     private LrcContent mLrcContent;		//声明一个歌词内容对象
+    //mp3时间
+    private long currentTime;
+    //MP3对应时间的内容
+    private String currentContent;
+
+
+
+    private InputStream inputStream;
+
     /**
      * 无参构造函数用来实例化对象
      */
     public LrcProcess() {
         mLrcContent = new LrcContent();
-        lrcList = new ArrayList<>();
+        lrcList = new ArrayList<LrcContent>();
     }
 
-    public boolean isLrc(String path){
-        File f = new File(path.replace(".mp3", ".lrc"));
-        if (f!=null){
-            return true;
-        }else
-            return false;
-    }
 
 
     /**
@@ -82,6 +86,9 @@ public class LrcProcess {
         }
         return stringBuilder.toString();
     }
+
+
+
     /**
      * 解析歌词时间
      * @param timeStr

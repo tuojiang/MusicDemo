@@ -155,4 +155,8 @@
         android:layout_marginTop="40dp"
         android:scaleType="centerInside"
         android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/testLrc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

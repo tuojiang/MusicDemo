@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //    默认播放模式为顺序播放
     private static int CURRENTMODE=ORDERMODE;
     private IntentFilter intentFilter;
-
+    private TextView testLrc;
     public ArrayList<LrcContent> mLrcList;//存放歌词列表对象
     private MyReceiver receiver;
     public class MyReceiver extends BroadcastReceiver {
@@ -75,19 +75,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mLrcList =  intent.getParcelableArrayListExtra("LRC_LIST");
             //转换为list集合
             lrcView.setmLrcList(mLrcList);
+            Log.i("MainActivity","setmLrcList"+String.valueOf(mLrcList.size()));
             lrcView.setAnimation(AnimationUtils.loadAnimation(MainActivity.this,R.anim.alpha_z));
+            Log.i("MainActivity","setAnimation");
             mHandler.post(mRunnable);
             System.out.println(mLrcList.size());
-            Log.d("lrc",String.valueOf(mLrcList.size()));
+            Log.i("MainActivity","post");
+            for (int i = 0; i <mLrcList.size() ; i++) {
+                System.out.println(mLrcList.get(i));
+            }
+            Log.i("MainActivity","for");
         }
     }
     Runnable mRunnable = new Runnable() {
 
         @Override
         public void run() {
+
             lrcView.setIndex(callBack.lrcIndex());
-            lrcView.invalidate();
+            Log.i("MainActivity","setIndex");
+//            lrcView.invalidate();
+            int a=callBack.lrcIndex();
+            Log.i("MainActivity","setIndex="+String.valueOf(a));
+            Log.i("MainActivity","invalidate");
             mHandler.postDelayed(mRunnable, 100);
+            Log.i("MainActivity","postDelayed");
         }
     };
 
@@ -115,13 +127,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String current = activity.format .format(new Date(currentTime));
                 String total = activity.format.format(new Date(totalTime));
                 //TODO 展示歌词
-//                activity.callBack.initLrc();
+                Log.i("MainActivity","initLrc");
+                activity.callBack.initLrc();
 //                activity.lrcView.setAnimation(AnimationUtils.loadAnimation(activity,R.anim.alpha_z));
 //                activity.lrcView.setIndex(activity.callBack.lrcIndex());
 //                activity.lrcView.invalidate();
 
                 activity.currentTimeTxt.setText(current);
                 activity.totalTimeTxt.setText(total);
+
+//                activity.testLrc.setText();
 
                 activity.mMusicTitle.setText(activity.callBack.getTitle());
                 activity.mMusicArtist.setText(activity.callBack.getArtist());
@@ -172,6 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMusicTitle= (TextView) findViewById(R.id.musicTitle);
         mMusicArtist= (TextView) findViewById(R.id.musicArtist);
 
+        testLrc= (TextView) findViewById(R.id.testLrc);
 
         currentTimeTxt = (TextView)findViewById(R.id.current_time_txt);
         totalTimeTxt = (TextView)findViewById(R.id.total_time_txt);

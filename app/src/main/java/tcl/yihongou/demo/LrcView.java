@@ -5,8 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,7 +32,8 @@ public class LrcView extends TextView {
 
     public void setmLrcList(List<LrcContent> mLrcList) {
         this.mLrcList = mLrcList;
-//        invalidate();
+        invalidate();
+        Log.i("LrcView","invalidate");
     }
     public LrcView(Context context) {
         super(context);
@@ -72,7 +73,7 @@ public class LrcView extends TextView {
         if(canvas == null) {
             return;
         }
-
+        Log.i("LrcView","onDraw");
         currentPaint.setColor(Color.argb(210, 251, 248, 29));
         notCurrentPaint.setColor(Color.argb(140, 255, 255, 255));
 

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 
@@ -40,7 +41,6 @@ public class MusicService extends Service {
     private int index = 0;          //歌词检索值
     private int currentTime;		//当前播放进度
     private int duration;			//播放长度
-    private List<Music> mp3Infos;	//存放Mp3Info对象的集合
     private MyBinder myBinder=new MyBinder();
 
 
@@ -195,12 +195,12 @@ public class MusicService extends Service {
         /*显示歌词*/
         @Override
         public void initLrc() {
+
             mLrcProcess = new LrcProcess();
             //读取歌词文件
             mLrcProcess.readLRC(musicPathLists.get(currentPos).getMusicPath());
             //传回处理后的歌词文件
             lrcList = mLrcProcess.getLrcList();
-//            MainActivity.lrcView.setmLrcList(lrcList);
 //          发送广播
             Intent intent = new Intent();
             Bundle bundle = new Bundle();
@@ -208,7 +208,7 @@ public class MusicService extends Service {
             intent.putExtra("SIZE",lrcList.size());
             intent.setAction("yihong.lrc");
             sendBroadcast(intent);
-
+            Log.i("MusciService","initlrc");
 
         }
         /*显示歌词索引值*/
@@ -417,6 +417,7 @@ public class MusicService extends Service {
         currentPos = intent.getIntExtra("CURRENT_POSITION", -1);
 //       initLrcx();
         myBinder.initLrc();
+
             initMusic();
             playerMusic();
 //        initMusic();
