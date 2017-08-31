@@ -75,16 +75,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mLrcList =  intent.getParcelableArrayListExtra("LRC_LIST");
             //转换为list集合
             lrcView.setmLrcList(mLrcList);
-            Log.i("MainActivity","setmLrcList"+String.valueOf(mLrcList.size()));
             lrcView.setAnimation(AnimationUtils.loadAnimation(MainActivity.this,R.anim.alpha_z));
-            Log.i("MainActivity","setAnimation");
             mHandler.post(mRunnable);
-            System.out.println(mLrcList.size());
-            Log.i("MainActivity","post");
-            for (int i = 0; i <mLrcList.size() ; i++) {
-                System.out.println(mLrcList.get(i));
-                Log.i("MainActivity","歌词内容："+mLrcList.get(i));
-            }
 
 
         }
